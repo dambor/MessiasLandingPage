@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Calendar, MapPin, Users, Clock, Heart, Star, Camera, Coffee, Music } from 'lucide-react';
+import { Calendar, MapPin, Users, Camera } from 'lucide-react';
 
 const MessiasLandingPage = () => {
   const [timeLeft, setTimeLeft] = useState({
@@ -13,10 +13,10 @@ const MessiasLandingPage = () => {
 
   // Frases do grupo (mais sutil)
   const quotes = [
-    '"Agora vai!" - Marlos',
-    '"Messias Forever!"',
-    '"A lenda finalmente vai acontecer!"',
-    '"Old War!" - Chico & Marlos'
+    '&quot;Agora vai!&quot; - Marlos',
+    '&quot;Messias Forever!&quot;',
+    '&quot;A lenda finalmente vai acontecer!&quot;',
+    '&quot;Old War!&quot; - Chico & Marlos'
   ];
   const [currentQuote, setCurrentQuote] = useState(0);
 
@@ -26,7 +26,7 @@ const MessiasLandingPage = () => {
     
     const updateCountdown = () => {
       const now = new Date();
-      const difference = targetDate - now;
+      const difference = targetDate.getTime() - now.getTime();
       
       if (difference > 0) {
         setTimeLeft({
@@ -49,7 +49,7 @@ const MessiasLandingPage = () => {
       setCurrentQuote((prev) => (prev + 1) % quotes.length);
     }, 4000);
     return () => clearInterval(interval);
-  }, []);
+  }, [quotes.length]);
 
   // Membros com personalidade (mais clean)
   const turmaMembers = [
@@ -118,7 +118,6 @@ const MessiasLandingPage = () => {
               <strong className="text-purple-600"> 2025 é o nosso ano!</strong>
             </p>
 
-            {/* Event Info Cards */}
             <div className="grid md:grid-cols-3 gap-8 mb-12">
               <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border-l-4 border-purple-500">
                 <Calendar className="w-12 h-12 mx-auto mb-4 text-purple-500" />
@@ -154,7 +153,7 @@ const MessiasLandingPage = () => {
         <div className="container mx-auto px-4 text-center">
           <h3 className="text-3xl font-bold mb-8 text-gray-800">Contagem Regressiva</h3>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-3xl mx-auto">
-            {Object.entries(timeLeft).map(([unit, value], index) => (
+            {Object.entries(timeLeft).map(([unit, value]) => (
               <div key={unit} className="bg-white rounded-2xl p-6 shadow-lg">
                 <div className="text-4xl font-bold text-purple-600 mb-2">{value}</div>
                 <div className="text-sm uppercase tracking-wide text-gray-600 font-medium">
@@ -176,7 +175,7 @@ const MessiasLandingPage = () => {
                 <div className="text-4xl mb-4">🏫</div>
                 <h4 className="text-xl font-bold mb-4 text-purple-600">1999 - A Formatura</h4>
                 <p className="text-gray-600 leading-relaxed">
-                  Nos formamos no Messias Pedreiro com a lendária camiseta "Alunos da Rosilene". 
+                  Nos formamos no Messias Pedreiro com a lendária camiseta &quot;Alunos da Rosilene&quot;. 
                   London, Poison e Public eram nossos points favoritos.
                 </p>
               </div>
@@ -185,8 +184,8 @@ const MessiasLandingPage = () => {
                 <div className="text-4xl mb-4">📱</div>
                 <h4 className="text-xl font-bold mb-4 text-pink-600">2023 - O Grupo</h4>
                 <p className="text-gray-600 leading-relaxed">
-                  Criamos o "Messias Forever" no WhatsApp. Milhões de enquetes sobre datas, 
-                  galera espalhada pelo mundo, e sempre o famoso "agora vai!"
+                  Criamos o &quot;Messias Forever&quot; no WhatsApp. Milhões de enquetes sobre datas, 
+                  galera espalhada pelo mundo, e sempre o famoso &quot;agora vai!&quot;
                 </p>
               </div>
               
@@ -213,11 +212,11 @@ const MessiasLandingPage = () => {
             </h3>
             
             <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 mb-8">
-              {Array.from({ length: 24 }).map((_, index) => (
-                <div key={index} className="aspect-square bg-white rounded-xl shadow-md hover:shadow-lg transition-all duration-300 flex items-center justify-center group cursor-pointer">
+              {Array.from({ length: 24 }).map((_, photoIndex) => (
+                <div key={photoIndex} className="aspect-square bg-white rounded-xl shadow-md hover:shadow-lg transition-all duration-300 flex items-center justify-center group cursor-pointer">
                   <div className="text-center text-gray-400 group-hover:text-purple-500 transition-colors">
                     <Camera className="w-8 h-8 mx-auto mb-2" />
-                    <p className="text-xs font-medium">Foto {index + 1}</p>
+                    <p className="text-xs font-medium">Foto {photoIndex + 1}</p>
                   </div>
                 </div>
               ))}
@@ -236,8 +235,8 @@ const MessiasLandingPage = () => {
           <div className="max-w-6xl mx-auto">
             <h3 className="text-3xl font-bold text-center mb-12 text-gray-800">Nossa Turma</h3>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-              {turmaMembers.map((member, index) => (
-                <div key={index} className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-all duration-300 text-center group">
+              {turmaMembers.map((member, memberIndex) => (
+                <div key={memberIndex} className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-all duration-300 text-center group">
                   <div className="text-3xl mb-3">{member.emoji}</div>
                   <h4 className="font-bold text-gray-800 mb-2">{member.name}</h4>
                   <p className="text-sm text-purple-600 font-medium">{member.nick}</p>
@@ -275,7 +274,7 @@ const MessiasLandingPage = () => {
               </div>
             </div>
             <p className="text-lg text-gray-600 mt-6 font-medium">
-              "Meta: atingir a meta e depois dobrar a meta!" 📈
+              &quot;Meta: atingir a meta e depois dobrar a meta!&quot; 📈
             </p>
           </div>
         </div>
@@ -287,7 +286,7 @@ const MessiasLandingPage = () => {
           <div className="max-w-2xl mx-auto">
             <h4 className="text-2xl font-bold mb-4">Messias Pedreiro - Turma 1999</h4>
             <p className="mb-6 text-gray-300">
-              "Uma vez Messias, sempre Messias!" ❤️
+              &quot;Uma vez Messias, sempre Messias!&quot; ❤️
             </p>
             <div className="flex justify-center space-x-6 text-sm text-gray-400">
               <span>Uberlândia - MG</span>
