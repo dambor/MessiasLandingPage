@@ -13,10 +13,10 @@ const MessiasLandingPage = () => {
 
   // Frases do grupo (mais sutil)
   const quotes = [
-    '&quot;Agora vai!&quot; - Marlos',
-    '&quot;Messias Forever!&quot;',
-    '&quot;A lenda finalmente vai acontecer!&quot;',
-    '&quot;Old War!&quot; - Chico & Marlos'
+    '"Agora vai!"; - Marlos',
+    '"Messias Forever!" - Chico',
+    '"A lenda finalmente vai acontecer!"',
+    '"Old War!" - Chico & Marlos'
   ];
   const [currentQuote, setCurrentQuote] = useState(0);
 
